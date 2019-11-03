@@ -5,10 +5,17 @@ import sqlite3
 import googleapiclient.discovery
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+<<<<<<< HEAD
 
 # ARGS
 # AuthToken: The file which authorizes access to the classroom
 # IOState: string which specifies what access level the service has with the api
+=======
+from typing import *
+#AGRS
+#AuthToken: The file which authorizes access to the classroom
+#IOState: string which specifies what access level the service has with the api
+>>>>>>> 9de6b51d156c59d806281c06a62d1a9ec9550731
 class service:
     def __init__(self, IOState):
         self.creds = None
@@ -40,21 +47,21 @@ class service:
     def getCourses(self) -> list:
         return self.Service.courses().list().execute()["courses"]
 
-    def getAssignments(self, courseId:str) -> list:
-        ass =  self.Service.courses().courseWork().list(courseId=courseId).execute()
-        return ass
 
-    def getStudents(self, courseId:str) -> dict:
-        student = self.Service.courses().students().list(courseId=courseId).execute()
-        for i in student['students']:
-            print(i["profile"])
-        return student
+    def getAssignments(self, courseId:str) -> List[dict]:
+        return self.Service.courses().courseWork().list(courseId=courseId).execute()
+
+    def getSubmissions(self, courseId:str, courseWorkId:str) -> list:
+        return self.Service.courses().courseWork().studentSubmissions().list(courseId=courseId, courseWorkId=courseWorkId).execute()
+
+    def getStudents(self, courseId:str) -> List[dict]:
+        return self.Service.courses().students().list(courseId=courseId).execute()
 
 class Course:
     def __init__(self, courseDict: dict, engine: service):
         self.courseName = courseDict["name"]
         self.students = [i for i in courseDict]
-
+        self.assignments = [i for i in engine.getAssignments(PLACEHOLDER)]
         pass
 
 
