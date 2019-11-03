@@ -40,6 +40,12 @@ class service:
     def getCourses(self) -> list:
         return self.Service.courses().list().execute()["courses"]
 
+    def getAssignemets(self, courseId:str) -> list:
+        return self.Service.courses().courseWork().list(courseId).execute()
+
+    def getStudents(self, courseId:str) -> list:
+        pass
+
 class Course:
     def __init__(self, courseDict: dict, engine: service):
         self.courseName = courseDict["name"]
