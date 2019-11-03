@@ -15,9 +15,8 @@ def main():
     coursesEngine.getAssignments('46905735568')
     coursesEngine.getStudents('46905735568')
 
-   # PopulateDB("gradebook", coursesEngine)
+    PopulateDB("gradebook", coursesEngine)
 
-    return
 
 
 if __name__ == "__main__":

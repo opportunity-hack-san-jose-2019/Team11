@@ -5,17 +5,10 @@ import sqlite3
 import googleapiclient.discovery
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
-<<<<<<< HEAD
-
-# ARGS
-# AuthToken: The file which authorizes access to the classroom
-# IOState: string which specifies what access level the service has with the api
-=======
 from typing import *
 #AGRS
 #AuthToken: The file which authorizes access to the classroom
 #IOState: string which specifies what access level the service has with the api
->>>>>>> 9de6b51d156c59d806281c06a62d1a9ec9550731
 class service:
     def __init__(self, IOState):
         self.creds = None
@@ -70,8 +63,8 @@ def PopulateDB(dp_path: str, engine: service) -> None:
 
     with con:
         for i in engine.getCourses():
-            for j in engine.getStudents(i)['students']:
+            for j in engine.getStudents(i['id'])['students']:
                 profile = j['profile']
-                con.execute('INSERT INTO Gradebook VALUES (?, ?, ?, ?, ?)', ("ineedbetteremail@joke.com", j['givenName'], j['familyName'], 0, 0))
+                con.execute('INSERT INTO Gradebook VALUES (?, ?, ?, ?, ?)', (j['ID'], j['givenName'], j['familyName'], 0, 0))
 
     con.close()
