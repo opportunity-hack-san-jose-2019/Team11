@@ -10,6 +10,7 @@ def main():
     )
 
     coursesEngine.getCourses()
+    coursesEngine.getStudents('33533282801')
 
 
 

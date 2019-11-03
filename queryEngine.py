@@ -4,7 +4,6 @@ import os.path
 import googleapiclient.discovery
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
-from typing import *
 
 #AGRS
 #AuthToken: The file which authorizes access to the classroom
@@ -40,14 +39,15 @@ class service:
     def getCourses(self) -> list:
         return self.Service.courses().list().execute()["courses"]
 
-    def getAssignemets(self, courseId:str) -> list:
-        return self.Service.courses().courseWork().list(courseId).execute()
+    def getAssignments(self, courseId:str) -> list:
+        return self.Service.courses().courseWork().list(courseId=courseId).execute()
 
     def getStudents(self, courseId:str) -> list:
-        pass
+        return self.Service.courses().students().list(courseId=courseId).execute()
 
 class Course:
     def __init__(self, courseDict: dict, engine: service):
         self.courseName = courseDict["name"]
-        #self.students = [for i in courseDict]
+        self.students = [i for i in courseDict]
+
         pass
