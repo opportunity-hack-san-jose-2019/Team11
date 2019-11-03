@@ -43,7 +43,7 @@ class service:
         return self.Service.courses().courseWork().list(courseId=courseId).execute()
 
     def getSubmissions(self, courseId:str, courseWorkId:str) -> list:
-        return self.Service.courses().courseWork().studentSubmissions().list(courseId=courseId, courseWorkId=courseWorkId)
+        return self.Service.courses().courseWork().studentSubmissions().list(courseId=courseId, courseWorkId=courseWorkId).execute()
 
     def getStudents(self, courseId:str) -> List[dict]:
         return self.Service.courses().students().list(courseId=courseId).execute()
